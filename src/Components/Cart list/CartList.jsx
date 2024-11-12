@@ -12,51 +12,43 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { Typography } from '@mui/material';
 
 const CartList = (props)=> {
 const {open, toggleDrawer} = props;
 const [cartItem,setCartItem] = useState()
 
 useEffect(()=>{
-  const CartItemArr = localStorage.getItem('CartList')
-  setCartItem(CartItemArr);
-},[])
+  const CartItemArr = localStorage.getItem('CartList');
+  const parseCartItemArr = JSON.parse(CartItemArr)
+   
+  setCartItem(parseCartItemArr);
+},[]);
 
-  const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
+ 
 
   return (
     <div>
       
       <Drawer open={open} onClose={toggleDrawer(false)}>
-        {DrawerList}
+        <Box sx={{ width: 250}} role="presentation" onClick={toggleDrawer(false)}>
+          <Typography variant='h5'>Cart Items</Typography>
+
+          {
+            cartItem?.map((item)=>{
+              return(
+              <Box>
+                <img width="70px" src={item.img} alt="" />
+                <span>{item.name}</span>
+                <span>{item.price}</span>
+                </Box>
+                
+              )
+            })
+          }
+
+        </Box>
+       
       </Drawer>
     </div>
   );

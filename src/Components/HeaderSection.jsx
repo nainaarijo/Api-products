@@ -17,6 +17,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CartList from './Cart list/CartList';
+import { useEffect } from 'react';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -61,6 +62,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function HeaderApp() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [CartItems ,setCartItem] = React.useState([]);
+
 
 
   const [open, setOpen] = React.useState(false);
@@ -163,6 +166,13 @@ export default function HeaderApp() {
     </Menu>
   );
 
+  useEffect(()=>{
+    const CartItemArr = localStorage.getItem('CartList');
+    const parseCartItemArr = JSON.parse(CartItemArr)
+     
+    setCartItem(parseCartItemArr);
+  },[]);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -184,7 +194,7 @@ export default function HeaderApp() {
           >
             MUI
           </Typography>
-          <Search>
+          {/* <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -192,11 +202,11 @@ export default function HeaderApp() {
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
-          </Search>
+          </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
+              <Badge badgeContent={1} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>
@@ -205,7 +215,7 @@ export default function HeaderApp() {
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
+              <Badge badgeContent={CartItems?.length} color="error">
               <ShoppingCartIcon  onClick = {toggleDrawer(true)}/>
               </Badge>
             </IconButton>
