@@ -1,19 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { createBrowserRouter, Link, RouterProvider } from 'react-router-dom';
-import App from './App'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import App from './App';
 import ProductDetails from './Components/ProductDetails';
 import Layout from './Components/Layout/Layout';
-
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import {store} from './store'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: < Layout />,
+    element: <Layout />,
     children: [
       {
         path: "",
-        element: < App />
+        element: <App />
       },
       {
         path: "product-details/:product_id",
@@ -21,15 +23,11 @@ const router = createBrowserRouter([
       }
     ],
   }
-
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
-  <RouterProvider router={router} />
-
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );
-
-
-

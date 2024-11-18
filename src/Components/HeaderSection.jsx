@@ -18,6 +18,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CartList from './Cart list/CartList';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -49,7 +50,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
+   
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -63,7 +64,9 @@ export default function HeaderApp() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [CartItems ,setCartItem] = React.useState([]);
+  const count = useSelector((state)=> state.counter) 
 
+console.log(count, "count");
 
 
   const [open, setOpen] = React.useState(false);
@@ -133,7 +136,7 @@ export default function HeaderApp() {
     >
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
+          <Badge badgeContent={0} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
@@ -145,7 +148,7 @@ export default function HeaderApp() {
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="error">
+          <Badge badgeContent={count?.value} color="error">
           <ShoppingCartIcon onClick = {toggleDrawer(true)}/>
           </Badge>
         </IconButton>
@@ -194,15 +197,7 @@ export default function HeaderApp() {
           >
             MUI
           </Typography>
-          {/* <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search> */}
+        
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
@@ -215,7 +210,7 @@ export default function HeaderApp() {
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={CartItems?.length} color="error">
+              <Badge badgeContent={count?.value} color="error">
               <ShoppingCartIcon  onClick = {toggleDrawer(true)}/>
               </Badge>
             </IconButton>
