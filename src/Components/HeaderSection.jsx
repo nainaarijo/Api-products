@@ -16,7 +16,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import CartList from './Cart list/CartList';
+import CartList from './CartList';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -50,7 +50,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-   
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -63,11 +62,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function HeaderApp() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [CartItems ,setCartItem] = React.useState([]);
-  const count = useSelector((state)=> state.counter) 
-
-console.log(count, "count");
-
+  const [CartItems, setCartItem] = React.useState([]);
+  const count = useSelector((state) => state.counter);
 
   const [open, setOpen] = React.useState(false);
 
@@ -143,13 +139,9 @@ console.log(count, "count");
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
+        <IconButton size="large" color="inherit" onClick={toggleDrawer(true)}>
           <Badge badgeContent={count?.value} color="error">
-          <ShoppingCartIcon onClick = {toggleDrawer(true)}/>
+            <ShoppingCartIcon />
           </Badge>
         </IconButton>
         <p>Notifications</p>
@@ -169,12 +161,12 @@ console.log(count, "count");
     </Menu>
   );
 
-  useEffect(()=>{
+  useEffect(() => {
     const CartItemArr = localStorage.getItem('CartList');
-    const parseCartItemArr = JSON.parse(CartItemArr)
-     
-    setCartItem(parseCartItemArr);
-  },[]);
+    const parseCartItemArr = JSON.parse(CartItemArr);
+
+    setCartItem(parseCartItemArr || []);
+  }, []);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -197,7 +189,7 @@ console.log(count, "count");
           >
             MUI
           </Typography>
-        
+
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
@@ -205,13 +197,9 @@ console.log(count, "count");
                 <MailIcon />
               </Badge>
             </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
+            <IconButton size="large" color="inherit" onClick={toggleDrawer(true)}>
               <Badge badgeContent={count?.value} color="error">
-              <ShoppingCartIcon  onClick = {toggleDrawer(true)}/>
+                <ShoppingCartIcon />
               </Badge>
             </IconButton>
             <IconButton
@@ -243,7 +231,7 @@ console.log(count, "count");
       {renderMobileMenu}
       {renderMenu}
 
-      <CartList  open={open}toggleDrawer={toggleDrawer}/>
+      <CartList open={open} toggleDrawer={toggleDrawer} />
     </Box>
   );
 }
