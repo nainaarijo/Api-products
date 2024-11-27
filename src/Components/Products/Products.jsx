@@ -22,6 +22,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../slices/add-cart/addCartSlice";
+import { addProduct } from "../../slices/product/SliceProduct";
 
 const Products = () => {
     const [cartList, setCartList] = useState([]);
@@ -193,7 +194,7 @@ const Products = () => {
                                             </Tooltip>
                                             <Tooltip title="Add to Cart">
                                                 <AddShoppingCartIcon
-                                                    onClick={()=>dispatch(addToCart())}
+                                                    onClick={()=>dispatch(addProduct(product))}
                                                 />
                                             </Tooltip>
                                         </Box>

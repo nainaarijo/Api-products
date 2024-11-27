@@ -32,7 +32,7 @@ const ProductDetails = () => {
       ) : (
         <Box sx={{ padding: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Grid container spacing={4} sx={{ width: '100%', maxWidth: '900px', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)', padding: '2rem', borderRadius: '8px' }}>
-            {/* Image Section */}
+            {}
             <Grid item xs={12} sm={6} className="text-center">
               <img
                 src={ProductDetails?.image}
@@ -46,7 +46,7 @@ const ProductDetails = () => {
               />
             </Grid>
 
-            {/* Product Details Section */}
+            {}
             <Grid item xs={12} sm={6}>
               <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#1976D2', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
                 Category: {ProductDetails?.category}

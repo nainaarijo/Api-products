@@ -16,7 +16,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import CartList from './CartList';
+import CartList from './Cart list/CartList';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 

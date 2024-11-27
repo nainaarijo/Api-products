@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// Initial state
+
 const initialState = {
     value: 0,
     product: [{ id: "1", name: "apple" }]
 };
 
-// Create slice
+
 export const counterSlice = createSlice({
     name: 'counter',
     initialState,
@@ -22,9 +22,9 @@ export const counterSlice = createSlice({
     }
 });
 
-// Export actions
+
 export const { addToCart, removeFromCart } = counterSlice.actions;
 
-// Export reducer
+
 export default counterSlice.reducer;
 
