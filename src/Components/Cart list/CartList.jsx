@@ -9,13 +9,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { decreaseQuantity, increaseQuantity } from "../../slices/product/SliceProduct";
 
 const CartList = (props) => {
-  const { open, toggleDrawer } = props; // Props for drawer
+  const { open, toggleDrawer } = props; 
   const dispatch = useDispatch();
 
-  // Fetch cart items from Redux state
+ 
   const { items } = useSelector((state) => state.product);
 
-  // Calculate total price
+
   const totalPrice = items.reduce(
     (sum, curr) => sum + curr.price * curr.quantity,
     0
@@ -31,7 +31,7 @@ const CartList = (props) => {
           >
              Cart
           </Typography>
-          {/* Conditional Rendering: Show text if no items */}
+      
           {items.length === 0 ? (
             <Box className="text-center">
               <Typography className="text-center mt-5" variant="h6">
@@ -41,7 +41,7 @@ const CartList = (props) => {
           ) : (
             items.map((itemList) => (
               <Box
-                key={itemList.id} // Unique key for each item
+                key={itemList.id} 
                 className="d-flex justify-content-around align-items-center my-3"
                 style={{ minHeight: "80px", maxHeight: "80px" }}
               >
@@ -80,7 +80,7 @@ const CartList = (props) => {
             ))
           )}
         </Box>
-        {/* Total Price */}
+       
         <Box className="position-absolute bottom-0 bg-primary w-100 d-flex justify-content-between p-3 text-white">
           <Typography variant="body1">Total Price</Typography>
           <Typography variant="body1">${totalPrice.toFixed(2)}</Typography>
